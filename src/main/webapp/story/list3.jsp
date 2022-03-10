@@ -19,12 +19,36 @@
 
 
         </div>
-        <div class="login">
-            <ul>
-                <li><a href="#">Đăng nhập</a></li>
-                <li><a href="#">Đăng ký</a></li>
-            </ul>
-        </div>
+        <c:choose>
+
+            <c:when test="${requestScope['user']  == null}">
+                <div class="login">
+                    <ul>
+                        <li><a href="/StoryServlet?action=login">Đăng nhập</a></li>
+                        <li><a href="/StoryServlet?action=register">Đăng ký</a></li>
+                    </ul>
+                </div>
+            </c:when>
+            <c:otherwise>
+                <div class="username">
+                    <!-- Example split danger button -->
+                    <div class="btn-group" style="float: right" margin-top="20px">
+                        <p>
+                                ${requestScope['user'].getUsername()}
+                        </p>
+                        <button type="button" class="btn  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Thông tin tài khoản</a></li>
+                            <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+
+            </c:otherwise>
+        </c:choose>
 
     </header>
     <nav>

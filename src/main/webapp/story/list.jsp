@@ -18,13 +18,41 @@
             <a href="#"><img src="image/logo_transparent-removebg-preview (1).png"></a>
 
 
+
         </div>
-        <div class="login">
-            <ul>
-                <li><a href="/StoryServlet?action=login">Đăng nhập</a></li>
-                <li><a href="/StoryServlet?action=register">Đăng ký</a></li>
-            </ul>
-        </div>
+        <c:choose>
+
+        <c:when test="${requestScope['user']  == null}">
+            <div class="login">
+                <ul>
+                    <li><a href="/StoryServlet?action=login">Đăng nhập</a></li>
+                    <li><a href="/StoryServlet?action=register">Đăng ký</a></li>
+                </ul>
+            </div>
+        </c:when>
+        <c:otherwise>
+            <div class="username">
+                <!-- Example split danger button -->
+                <div class="btn-group" style="float: right" margin-top="20px">
+                    <p>
+                            ${requestScope['user'].getUsername()}
+                    </p>
+                    <button type="button" class="btn  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="visually-hidden">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Thông tin tài khoản</a></li>
+                        <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
+
+                    </ul>
+                </div>
+            </div>
+
+        </c:otherwise>
+        </c:choose>
+
+
+
 
     </header>
     <nav>
@@ -79,7 +107,7 @@
                 <div class="product">
                     <c:forEach items="${requestScope['storyList']}" var="story">
                         <div class="content">
-                            <div class="card" style="width: 12rem;">
+                            <div class="card" style="width: 12rem; white-space: nowrap ; overflow:hidden; text-overflow: ellipsis ">
                                 <a href="/StoryServlet?action=view&id=${story.getId()}"><img src="${story.getImg()}" class="card-img-top"></a>
                                 <div class="card-body">
                                     <h5 style="font-size: 20px" class="card-title name">${story.getName()}</h5>

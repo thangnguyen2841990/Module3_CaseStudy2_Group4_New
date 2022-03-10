@@ -26,11 +26,11 @@ public class PartDAO implements IPartDAO {
 
     @Override
     public List<Part> seleceAllPartOfStory(int storyID) {
-        String query = "{call SELECT_PART_BY_ID1(?)}";
+
         List<Part> parts = new ArrayList<>();
         Connection connection = getConnection();
         try {
-            CallableStatement statement = connection.prepareCall(query);
+           PreparedStatement statement = connection.prepareStatement("SELECT * from part where storyId = ?");
             statement.setInt(1,storyID);
             System.out.println(statement);
             ResultSet rs = statement.executeQuery();

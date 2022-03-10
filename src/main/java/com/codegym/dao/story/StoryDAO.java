@@ -39,8 +39,8 @@ public class StoryDAO implements IStoryDAO {
                 String img = rs.getString("img");
                 String name = rs.getString("name");
                 Double price = rs.getDouble("price");
-                String writer = rs.getString("writer");
-                String dateSubmited = rs.getString("dateSubmited");
+                String writer = rs.getString("author");
+                String dateSubmited = rs.getString("dateSubmitted");
 
                 storyList.add(new Story(id,categoryId,img,name,price,writer,dateSubmited));
             }
@@ -64,8 +64,8 @@ public class StoryDAO implements IStoryDAO {
                 String img = rs.getString("img");
                 String name = rs.getString("name");
                 Double price = rs.getDouble("price");
-                String writer = rs.getString("writer");
-                String dateSubmited = rs.getString("dateSubmited");
+                String writer = rs.getString("author");
+                String dateSubmited = rs.getString("dateSubmitted");
                 stories.add( new Story(id,categoryId,img,name,price,writer,dateSubmited));
             }
         } catch (SQLException e) {
@@ -89,8 +89,8 @@ public class StoryDAO implements IStoryDAO {
                 String name1 = rs.getString("name");
                 String img = rs.getString("img");
                 Double price = rs.getDouble("price");
-                String writer = rs.getString("writer");
-                String dateSubmited = rs.getString("dateSubmited");
+                String writer = rs.getString("author");
+                String dateSubmited = rs.getString("dateSubmitted");
                 storyList.add( new Story(id,categoryId,img,name1,price,writer,dateSubmited));
             }
         } catch (SQLException e) {
