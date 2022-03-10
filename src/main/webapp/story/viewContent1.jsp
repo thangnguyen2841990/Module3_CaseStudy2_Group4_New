@@ -32,16 +32,16 @@
             <c:otherwise>
                 <div class="username">
                     <!-- Example split danger button -->
-                    <div class="btn-group" style="float: right" margin-top="20px">
-                        <p>
+                    <div class="btn-group" style="float: right">
+                        <h5 style = "margin-top: 20px ; font-size: 15px">
                                 ${requestScope['user'].getUsername()}
-                        </p>
-                        <button type="button" class="btn  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                        </h5>
+                        <button style = "margin-top: 10px" type="button" class="btn  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="visually-hidden">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Thông tin tài khoản</a></li>
-                            <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
+                            <li><a class="dropdown-item" href="/StoryServlet?action=logOut">Đăng xuất</a></li>
 
                         </ul>
                     </div>
@@ -49,6 +49,7 @@
 
             </c:otherwise>
         </c:choose>
+
 
     </header>
     <nav>
@@ -99,6 +100,7 @@
 
             <center>
                 <div class="col-10">
+
                     <div class="lable">
                         <h3>${requestScope['part'].getName()}</h3>
 
@@ -112,10 +114,10 @@
                             <!-- Example split danger button -->
 
                         <div class="btn-group">
-                                <button type="button" class="btn btn-danger">Chương</button>
+                                <button type="button" style="margin-bottom:20px" class="btn btn-danger">Chương</button>
 
 
-                            <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button type="button" style="margin-bottom:20px" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                                     <span class="visually-hidden">Toggle Dropdown</span>
                                 </button>
 

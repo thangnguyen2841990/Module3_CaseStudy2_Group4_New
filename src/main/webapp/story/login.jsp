@@ -1,129 +1,118 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!--author:starttemplate-->
+<!--reference site : starttemplate.com-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="/story/style1.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="keywords"
+          content="unique login form,leamug login form,boostrap login form,responsive login form,free css html login form,download login form">
+    <meta name="author" content="leamug">
+    <title>Unique Login Form | Bootstrap Templates</title>
+    <link href="css/style.css" rel="stylesheet" id="style">
+    <!-- Bootstrap core Library -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet">
+    <!-- Font Awesome-->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
+<style>
+    /*author:starttemplate*/
+    /*reference site : starttemplate.com*/
+    body {
+        background-image:url('https://i.redd.it/o8dlfk93azs31.jpg');
+        background-position:center;
+        background-size:cover;
+
+        -webkit-font-smoothing: antialiased;
+        font: normal 14px Roboto,arial,sans-serif;
+        font-family: 'Dancing Script', cursive!important;
+    }
+
+    .container {
+        padding: 110px;
+    }
+    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: #ffffff!important;
+        opacity: 1; /* Firefox */
+        font-size:18px!important;
+    }
+    .form-login {
+        background-color: rgba(0,0,0,0.55);
+        padding-top: 10px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        border-radius: 15px;
+        border-color:#d2d2d2;
+        border-width: 5px;
+        color:white;
+        box-shadow:0 1px 0 #cfcfcf;
+    }
+    .form-control{
+        background:transparent!important;
+        color:white!important;
+        font-size: 18px!important;
+    }
+    h1{
+        color:white!important;
+    }
+    h4 {
+        border:0 solid #fff;
+        border-bottom-width:1px;
+        padding-bottom:10px;
+        text-align: center;
+    }
+
+    .form-control {
+        border-radius: 10px;
+    }
+    .text-white{
+        color: white!important;
+    }
+    .wrapper {
+        text-align: center;
+    }
+    .footer p{
+        font-size: 18px;
+    }
+</style>
 <body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+<!-- Page Content -->
 <div class="container">
-    <header>
-        <div class="logo">
-            <a href="#"><img src="image/logo_transparent-removebg-preview (1).png"></a>
+    <div class="row">
+        <div class="col-md-offset-5 col-md-4 text-center">
+            <h1 class='text-white'>Unique Login Form</h1>
 
+            <div class="form-login"></br>
+                <form method = post>
+                <h4>LOGIN</h4>
+                </br>
+                <input type="text" name="username" class="form-control input-sm chat-input" placeholder="Username"/>
+                </br></br>
+                <input type="password" name="password" class="form-control input-sm chat-input" placeholder="Password"/>
+                </br></br>
+                <div class="wrapper">
+                        <span class="group-btn">
+                            <button class="btn btn-danger">Login</button>
+                        </span>
+                </div>
 
-        </div>
-        <div class="login">
-            <ul>
-                <li><a href="#">Đăng nhập</a></li>
-                <li><a href="/StoryServlet?action=register">Đăng ký</a></li>
-            </ul>
-        </div>
+                </form>
 
-    </header>
-    <nav>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/StoryServlet">Trang chủ</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Danh mục truyện
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/StoryServlet?action=viewByCategory&id=1">Truyện tranh</a></li>
-                                <li><a class="dropdown-item" href="/StoryServlet?action=viewByCategory&id=2">Tiểu thuyết</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <form class="d-flex" method="post" action="/StoryServlet?action=find">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="name">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                </div>
-            </div>
-        </nav>
-    </nav>
-
-    <div class="slide">
-        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="image/hinh-nen-luffy-one-piece-29.jpg" class="d-block w-100" >
-                </div>
-                <div class="carousel-item">
-                    <img src="image/4568110 (1).jpg" class="d-block w-100" >
-                </div>
-                <div class="carousel-item">
-                    <img src="image/bo-hinh-nen-truyen-tranh-hap-dan-nguoi-xem-nhat-26.jpg" class="d-block w-100" >
-                </div>
             </div>
         </div>
     </div>
 
-    <content>
-        <div class="row">
-
-
-            <div class="col-10">
-                <h3>ĐĂNG NHẬP</h3>
-
-                <form method="post">
-                    <div class="mb-3">
-                        <label for="formGroupExampleInput" class="form-label">Tài khoản</label>
-                        <input type="text" name="username" class="form-control" id="formGroupExampleInput" placeholder="Tên tài khoản(6-12 ký tự, không ký tự in hoa)">
-                    </div>
-                    <div class="mb-3">
-                        <label for="formGroupExampleInput2" class="form-label">Mật khẩu</label>
-                        <input type="password" name="password" class="form-control" id="formGroupExampleInput2" placeholder="Mật khẩu ít nhất 6 ký tự">
-                    </div>
-                    <div class="btn-primary">
-                        <button type="submit" class="btn btn-primary">Xác nhận</button>
-                    </div>
-                </form>
-            </div>
-            <div class="col-2">
-                <div class="sidebar">
-                    <ul class="nav flex-column1">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/StoryServlet">Trang chủ</a>
-                        </li>
-                        <li class="nav-item">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Danh mục truyện
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/StoryServlet?action=viewByCategory&id=1">Truyện tranh</a></li>
-                                <li><a class="dropdown-item" href="/StoryServlet?action=viewByCategory&id=2">Tiểu thuyết</a></li>
-                            </ul>
-                        </li>
-                        </li>
-
-                        <li class="nav-item">
-                            <form class="d-flex" method="post" action="/StoryServlet?action=find">
-                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="name">
-                                <button class="btn btn-outline-success" type="submit">Search</button>
-                            </form>
-                        </li>
-
-                    </ul>
-
-                </div>
-            </div>
-        </div>
-    </content>
 
 </div>
 </body>
 </html>
-

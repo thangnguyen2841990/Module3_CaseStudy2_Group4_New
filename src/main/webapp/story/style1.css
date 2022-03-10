@@ -94,6 +94,7 @@ content .content{
 .image{
     float: right;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 .content-img{
 

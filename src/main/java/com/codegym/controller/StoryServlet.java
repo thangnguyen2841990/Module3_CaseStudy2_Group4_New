@@ -43,52 +43,67 @@ public class StoryServlet extends HttpServlet {
             }
             case "login": {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("story/login.jsp");
-
                 dispatcher.forward(request, response);
+                break;
+            }
+            case "logOut": {
+                HttpSession session = request.getSession();
+                User user = (User) session.getAttribute("user");
+                session.removeAttribute("user");
+                List<Story> storyList = this.storyDAO.selectAllStory();
+                request.setAttribute("storyList", storyList);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("story/list.jsp");
+                dispatcher.forward(request, response);
+                break;
             }
             case "view": {
                 HttpSession session = request.getSession();
                 User user = (User) session.getAttribute("user");
-                session.setAttribute("user",user);
+                request.setAttribute("user", user);
                 int id = Integer.parseInt(request.getParameter("id"));
                 List<Part> parts = this.partDAO.seleceAllPartOfStory(id);
                 request.setAttribute("parts", parts);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("story/viewPart.jsp");
-
                 dispatcher.forward(request, response);
-
-
                 break;
             }
             case "viewByCategory": {
                 int id = Integer.parseInt(request.getParameter("id"));
+                HttpSession session = request.getSession();
+                User user = (User) session.getAttribute("user");
                 if (id == 1) {
                     List<Story> storyList = this.storyDAO.selectByCategoryId(id);
                     request.setAttribute("storyList", storyList);
+                    request.setAttribute("user", user);
                     RequestDispatcher dispatcher = request.getRequestDispatcher("story/list1.jsp");
                     dispatcher.forward(request, response);
                 } else if (id == 2) {
                     List<Story> storyList = this.storyDAO.selectByCategoryId(id);
                     request.setAttribute("storyList", storyList);
+                    request.setAttribute("user", user);
                     RequestDispatcher dispatcher = request.getRequestDispatcher("story/list2.jsp");
                     dispatcher.forward(request, response);
                 }
-
                 break;
             }
+
             case "read": {
                 HttpSession session = request.getSession();
                 User user = (User) session.getAttribute("user");
-                if(user == null){
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("story/login.jsp");
+                if (user == null) {
+                    request.setAttribute("message", "Bạn cần đăng nhập mới có thể thao thác!");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("story/alert.jsp");
                     dispatcher.forward(request, response);
-                }else {
+                } else {
                     int storyId = Integer.parseInt(request.getParameter("storyId"));
                     int partId = Integer.parseInt(request.getParameter("id"));
                     int categoryId = Integer.parseInt(request.getParameter("categoryId"));
                     if (categoryId == 1) {
                         List<PartImage> images = this.partImageDAO.selectAllImg(storyId, partId);
+                        List<Part> parts = this.partDAO.seleceAllPartOfStory(storyId);
+                        request.setAttribute("parts", parts);
                         Part part = this.partDAO.selectById(partId);
+                        request.setAttribute("user", user);
                         request.setAttribute("part", part);
                         request.setAttribute("images", images);
                         RequestDispatcher dispatcher = request.getRequestDispatcher("story/viewContent.jsp");
@@ -98,6 +113,7 @@ public class StoryServlet extends HttpServlet {
                     if (categoryId == 2) {
                         Part part = this.partDAO.selectById(partId);
                         List<Part> parts = this.partDAO.seleceAllPartOfStory(storyId);
+                        request.setAttribute("user", user);
                         request.setAttribute("part", part);
                         request.setAttribute("parts", parts);
                         RequestDispatcher dispatcher = request.getRequestDispatcher("story/viewContent1.jsp");
@@ -105,7 +121,7 @@ public class StoryServlet extends HttpServlet {
                     }
                 }
 
-
+                break;
             }
             default: {
                 HttpSession session = request.getSession();
@@ -137,7 +153,7 @@ public class StoryServlet extends HttpServlet {
                 dispatcher.forward(request, response);
                 break;
             }
-            case "login" : {
+            case "login": {
                 String username = request.getParameter("username");
                 String password = request.getParameter("password");
                 boolean checkLogin = this.userDAO.checkLogin(username, password);
@@ -147,28 +163,10 @@ public class StoryServlet extends HttpServlet {
                     request.setAttribute("user", user);
                     HttpSession session = request.getSession();
                     session.setAttribute("user", user);
-
-//                    int partId = Integer.parseInt(request.getParameter("part"));
-//                    int storyId = Integer.parseInt(request.getParameter("story"));
-//                    int categoryId = Integer.parseInt(request.getParameter("categoryId"));
-//                    if (action == "read" & categoryId == 2) {
-//                        Part part = this.partDAO.selectById(partId);
-//                        List<Part> parts = this.partDAO.seleceAllPartOfStory(storyId);
-//                        request.setAttribute("part", part);
-//                        request.setAttribute("parts", parts);
-//                        RequestDispatcher dispatcher = request.getRequestDispatcher("story/viewContent1.jsp");
-//                        dispatcher.forward(request, response);
-//                    }
-//                    if (action == "read" & categoryId == 1) {
-//                        List<PartImage> images = this.partImageDAO.selectAllImg(storyId, partId);
-//                        Part part = this.partDAO.selectById(partId);
-//                        request.setAttribute("part", part);
-//                        request.setAttribute("images", images);
-//                        RequestDispatcher dispatcher = request.getRequestDispatcher("story/viewContent.jsp");
-//                        dispatcher.forward(request, response);
-//                    }
-                        RequestDispatcher dispatcher = request.getRequestDispatcher("story/list.jsp");
-                        dispatcher.forward(request, response);
+                    List<Story> storyList = this.storyDAO.selectAllStory();
+                    request.setAttribute("storyList", storyList);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("story/list.jsp");
+                    dispatcher.forward(request, response);
 
                 }
                 break;
@@ -186,12 +184,13 @@ public class StoryServlet extends HttpServlet {
                     User newUser = new User(username, password, fullName, email, address, phone);
                     this.userDAO.register(newUser);
                     request.setAttribute("user", newUser);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("story/register.jsp");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("story/login.jsp");
                     dispatcher.forward(request, response);
                 } else {
 
                 }
             }
+
         }
     }
 }

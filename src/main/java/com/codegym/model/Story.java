@@ -6,14 +6,14 @@ public class Story {
     protected String img;
 
     protected String name;
-    protected double price;
+    protected int price;
     protected String writer;
     protected String dateSubmited;
 
     public Story() {
     }
 
-    public Story(int id, int categoryId, String img, String name, double price, String writer, String dateSubmited) {
+    public Story(int id, int categoryId, String img, String name, int price, String writer, String dateSubmited) {
         this.id = id;
         this.categoryId = categoryId;
         this.img = img;
@@ -23,7 +23,7 @@ public class Story {
         this.dateSubmited = dateSubmited;
     }
 
-    public Story(int categoryId, String img, String name, double price, String writer, String dateSubmited) {
+    public Story(int categoryId, String img, String name, int price, String writer, String dateSubmited) {
         this.categoryId = categoryId;
         this.img = img;
         this.name = name;
@@ -68,7 +68,7 @@ public class Story {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

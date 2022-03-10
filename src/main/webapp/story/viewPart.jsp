@@ -32,16 +32,16 @@
             <c:otherwise>
                 <div class="username">
                     <!-- Example split danger button -->
-                    <div class="btn-group" style="float: right" margin-top="20px">
-                        <p>
+                    <div class="btn-group" style="float: right">
+                        <h5 style = "margin-top: 20px ; font-size: 15px">
                                 ${requestScope['user'].getUsername()}
-                        </p>
-                        <button type="button" class="btn  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                        </h5>
+                        <button style = "margin-top: 10px" type="button" class="btn  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                             <span class="visually-hidden">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#">Thông tin tài khoản</a></li>
-                            <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
+                            <li><a class="dropdown-item" href="/StoryServlet?action=logOut">Đăng xuất</a></li>
 
                         </ul>
                     </div>
@@ -49,6 +49,8 @@
 
             </c:otherwise>
         </c:choose>
+
+
 
     </header>
     <nav>
@@ -101,7 +103,7 @@
             <div class="col-10">
                 <h3>DANH SÁCH CÁC TÂP CỦA TRUYỆN</h3>
                 <div class="product">
-                   
+
                         <table class="table table-sm">
                             <tr>
                                 <th>Tập</th>

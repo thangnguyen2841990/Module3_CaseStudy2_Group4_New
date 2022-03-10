@@ -38,7 +38,10 @@ public class StoryDAO implements IStoryDAO {
                 int categoryId = rs.getInt("categoryId");
                 String img = rs.getString("img");
                 String name = rs.getString("name");
-                Double price = rs.getDouble("price");
+                if (name.length() > 16){
+                    name = name.substring(0,16) + "...";
+                }
+                int price = (int) rs.getDouble("price");
                 String writer = rs.getString("author");
                 String dateSubmited = rs.getString("dateSubmitted");
 
@@ -63,7 +66,10 @@ public class StoryDAO implements IStoryDAO {
                 int id = rs.getInt("id");
                 String img = rs.getString("img");
                 String name = rs.getString("name");
-                Double price = rs.getDouble("price");
+                if (name.length() > 16){
+                    name = name.substring(0,16) + "...";
+                }
+                int price = (int) rs.getDouble("price");
                 String writer = rs.getString("author");
                 String dateSubmited = rs.getString("dateSubmitted");
                 stories.add( new Story(id,categoryId,img,name,price,writer,dateSubmited));
@@ -87,8 +93,11 @@ public class StoryDAO implements IStoryDAO {
                 int id = rs.getInt("id");
                 int categoryId = rs.getInt("categoryId");
                 String name1 = rs.getString("name");
+                if (name.length() > 16){
+                    name = name.substring(0,16) + "...";
+                }
                 String img = rs.getString("img");
-                Double price = rs.getDouble("price");
+                int price = (int) rs.getDouble("price");
                 String writer = rs.getString("author");
                 String dateSubmited = rs.getString("dateSubmitted");
                 storyList.add( new Story(id,categoryId,img,name1,price,writer,dateSubmited));
