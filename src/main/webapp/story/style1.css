@@ -111,3 +111,6 @@ content .content{
     float: right;
 
 }
+.username a {
+    float: right;
+}

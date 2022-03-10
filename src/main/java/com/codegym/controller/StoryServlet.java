@@ -40,11 +40,8 @@ public class StoryServlet extends HttpServlet {
                 dispatcher.forward(request, response);
                 break;
             }
-            case "view1": {
-                int id = Integer.parseInt(request.getParameter("storyId"));
-                List<Part> parts = this.partDAO.seleceAllPartOfStory(id);
-                request.setAttribute("parts", parts);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("story/viewContent1.jsp");
+            case "login": {
+                RequestDispatcher dispatcher = request.getRequestDispatcher("story/login.jsp");
 
                 dispatcher.forward(request, response);
             }
@@ -125,6 +122,18 @@ public class StoryServlet extends HttpServlet {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("story/list3.jsp");
                 dispatcher.forward(request, response);
                 break;
+            }
+            case "login" : {
+                String username = request.getParameter("username");
+                String password = request.getParameter("password");
+                boolean checkLogin = this.userDAO.checkLogin(username,password);
+                User user = this.userDAO.findUserByUsernameAndPassword(username,password);
+
+                if (checkLogin){
+                    request.setAttribute("user",user);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("story/listUser.jsp");
+                    dispatcher.forward(request, response);
+                }
             }
             case "register": {
                 String username = request.getParameter("username");

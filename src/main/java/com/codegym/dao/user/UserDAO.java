@@ -4,6 +4,8 @@ import com.codegym.dao.DBConnection;
 import com.codegym.model.User;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAO implements IUserDAO {
 
@@ -44,4 +46,60 @@ public class UserDAO implements IUserDAO {
         }
 
     }
+
+    @Override
+    public List<User> findAll() {
+        List<User> users = new ArrayList<>();
+        Connection connection = getConnection();
+        try {
+            PreparedStatement statement = connection.prepareStatement("Select * from user");
+             ResultSet rs = statement.executeQuery();
+
+             while (rs.next()) {
+                 int id = rs.getInt("id");
+                 String username = rs.getString("username");
+                 String password = rs.getString("password");
+
+                  double credit =rs.getDouble("credit");
+                 String fullName= rs.getString("fullName");
+                boolean role = rs.getBoolean("role");
+                 String email= rs.getString("email");
+                  String img =rs.getString("img");
+                  String address = rs.getString("address");
+                  String phone = rs.getString("phone");
+                  users.add(new User(id,username,password,credit,fullName,role,email,img,address,phone));
+             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
+    @Override
+    public User findUserByUsernameAndPassword(String username, String password) {
+        List<User> users = findAll();
+        int index = -1;
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUsername().equals(username) && users.get(i).getPassword().equals(password)) {
+                index = i;
+            }
+        }
+        User user = users.get(index);
+        return user;
+    }
+
+    @Override
+    public boolean checkLogin(String username, String password) {
+        boolean checkLogin = false;
+        List<User> users = findAll();
+        int index = -1;
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUsername().equals(username) && users.get(i).getPassword().equals(password)) {
+                checkLogin = true;
+            }
+        }
+        return checkLogin;
+    }
+
+
 }

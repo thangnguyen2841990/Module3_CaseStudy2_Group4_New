@@ -19,12 +19,11 @@
 
 
         </div>
-        <div class="login">
-            <ul>
-                <li><a href="/StoryServlet?action=login">Đăng nhập</a></li>
-                <li><a href="/StoryServlet?action=register">Đăng ký</a></li>
-            </ul>
-        </div>
+            <div class="username">
+                <p>
+                    <a style="float:right" href="#">Chào mừng:  ${requestScope['user'].getUsername()}</a>
+                </p>
+            </div>
 
     </header>
     <nav>
@@ -95,32 +94,32 @@
             </div>
             <div class="col-2">
                 <div class="sidebar">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/StoryServlet">Trang chủ</a>
-                    </li>
-                    <li class="nav-item">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Danh mục truyện
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/StoryServlet?action=viewByCategory&id=1">Truyện tranh</a></li>
-                            <li><a class="dropdown-item" href="/StoryServlet?action=viewByCategory&id=2">Tiểu thuyết</a></li>
-                        </ul>
-                    </li>
-                    </li>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/StoryServlet">Trang chủ</a>
+                        </li>
+                        <li class="nav-item">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Danh mục truyện
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/StoryServlet?action=viewByCategory&id=1">Truyện tranh</a></li>
+                                <li><a class="dropdown-item" href="/StoryServlet?action=viewByCategory&id=2">Tiểu thuyết</a></li>
+                            </ul>
+                        </li>
+                        </li>
 
-                    <li class="nav-item">
-                        <form class="d-flex" method="post" action="/StoryServlet?action=find">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="name">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                    </li>
+                        <li class="nav-item">
+                            <form class="d-flex" method="post" action="/StoryServlet?action=find">
+                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="name">
+                                <button class="btn btn-outline-success" type="submit">Search</button>
+                            </form>
+                        </li>
 
-                </ul>
+                    </ul>
                     <div class="image">
-                    <img src="image/yeuemsautansaotroikiaQCXcA8a6rV.jpg" width="350" >
+                        <img src="image/yeuemsautansaotroikiaQCXcA8a6rV.jpg" width="350" >
                     </div>
                 </div>
             </div>

@@ -21,7 +21,7 @@
         </div>
         <div class="login">
             <ul>
-                <li><a href="/StoryServlet?action=login">Đăng nhập</a></li>
+                <li><a href="#">Đăng nhập</a></li>
                 <li><a href="/StoryServlet?action=register">Đăng ký</a></li>
             </ul>
         </div>
@@ -75,66 +75,55 @@
 
 
             <div class="col-10">
-                <h3>TRUYỆN ĐƯỢC YÊU THÍCH</h3>
-                <div class="product">
-                    <c:forEach items="${requestScope['storyList']}" var="story">
-                        <div class="content">
-                            <div class="card" style="width: 12rem;">
-                                <a href="/StoryServlet?action=view&id=${story.getId()}"><img src="${story.getImg()}" class="card-img-top"></a>
-                                <div class="card-body">
-                                    <h5 style="font-size: 20px" class="card-title name">${story.getName()}</h5>
-                                    <h5 class="card-title">Tác giả: ${story.getWriter()}</h5>
-                                    <p class="card-text">Giá: ${story.getPrice()} (VND)</p>
+                <h3>ĐĂNG NHẬP</h3>
 
-                                </div>
-
-                            </div>
-                        </div>
-                    </c:forEach>
-                </div>
+                <form method="post">
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label">Tài khoản</label>
+                        <input type="text" name="username" class="form-control" id="formGroupExampleInput" placeholder="Tên tài khoản(6-12 ký tự, không ký tự in hoa)">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label">Mật khẩu</label>
+                        <input type="password" name="password" class="form-control" id="formGroupExampleInput2" placeholder="Mật khẩu ít nhất 6 ký tự">
+                    </div>
+                    <div class="btn-primary">
+                        <button type="submit" class="btn btn-primary">Xác nhận</button>
+                    </div>
+                </form>
             </div>
             <div class="col-2">
                 <div class="sidebar">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/StoryServlet">Trang chủ</a>
-                    </li>
-                    <li class="nav-item">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Danh mục truyện
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/StoryServlet?action=viewByCategory&id=1">Truyện tranh</a></li>
-                            <li><a class="dropdown-item" href="/StoryServlet?action=viewByCategory&id=2">Tiểu thuyết</a></li>
-                        </ul>
-                    </li>
-                    </li>
+                    <ul class="nav flex-column1">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/StoryServlet">Trang chủ</a>
+                        </li>
+                        <li class="nav-item">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Danh mục truyện
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/StoryServlet?action=viewByCategory&id=1">Truyện tranh</a></li>
+                                <li><a class="dropdown-item" href="/StoryServlet?action=viewByCategory&id=2">Tiểu thuyết</a></li>
+                            </ul>
+                        </li>
+                        </li>
 
-                    <li class="nav-item">
-                        <form class="d-flex" method="post" action="/StoryServlet?action=find">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="name">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                    </li>
+                        <li class="nav-item">
+                            <form class="d-flex" method="post" action="/StoryServlet?action=find">
+                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="name">
+                                <button class="btn btn-outline-success" type="submit">Search</button>
+                            </form>
+                        </li>
 
-                </ul>
-                    <div class="image">
-                    <img src="image/yeuemsautansaotroikiaQCXcA8a6rV.jpg" width="350" >
-                    </div>
+                    </ul>
+
                 </div>
             </div>
         </div>
     </content>
-    <nav1 aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-        </ul>
-    </nav1>
+
 </div>
 </body>
 </html>
+
