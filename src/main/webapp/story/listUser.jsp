@@ -19,12 +19,38 @@
 
 
         </div>
-        <div class="login">
-            <ul>
-                <li><a href="/StoryServlet?action=login">Đăng nhập</a></li>
-                <li><a href="/StoryServlet?action=register">Đăng ký</a></li>
-            </ul>
-        </div>
+        <c:choose>
+
+            <c:when test="${requestScope['user']  == null}">
+                <div class="login">
+                    <ul>
+                        <li><a href="/StoryServlet?action=login">Đăng nhập</a></li>
+                        <li><a href="/StoryServlet?action=register">Đăng ký</a></li>
+                    </ul>
+                </div>
+            </c:when>
+            <c:otherwise>
+                <div class="username">
+                    <!-- Example split danger button -->
+                    <div class="btn-group" style="float: right">
+                        <h5 style = "margin-top: 20px ; font-size: 15px">
+                                ${requestScope['user'].getUsername()}
+                        </h5>
+                        <button style = "margin-top: 10px" type="button" class="btn  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="visually-hidden">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Thông tin tài khoản</a></li>
+                            <li><a class="dropdown-item" href="/StoryServlet?action=logOut">Đăng xuất</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+
+            </c:otherwise>
+        </c:choose>
+
+
 
     </header>
     <nav>
@@ -75,46 +101,27 @@
 
 
             <div class="col-10">
-                <h3>ĐĂNG KÝ TÀI KHOẢN</h3>
+                <h3>TRUYỆN ĐƯỢC YÊU THÍCH</h3>
+                <div class="product">
+                    <c:forEach items="${requestScope['storyList']}" var="story">
+                        <div class="content">
+                            <div class="card" style="width: 12rem; white-space: nowrap ; overflow:hidden; text-overflow: ellipsis ">
+                                <a style="text-decoration: none" href="/StoryServlet?action=view&id=${story.getId()}"><img src="${story.getImg()}" class="card-img-top"></a>
+                                <div class="card-body">
+                                    <a style="text-decoration: none" href="/StoryServlet?action=view&id=${story.getId()}"><h5 style="font-size: 20px" class="card-title name">${story.getName()}</h5></a>
+                                    <h5 class="card-title">Tác giả: ${story.getWriter()}</h5>
+                                    <p class="card-text">Giá: ${story.getPrice()} (VND)</p>
 
-                <form method="post">
-                <div class="mb-3">
-                    <label for="formGroupExampleInput" class="form-label">Tài khoản</label>
-                    <input type="text" size="20" name="username" class="form-control" id="formGroupExampleInput" placeholder="Tên tài khoản(6-12 ký tự, không ký tự in hoa)">
+                                </div>
+
+                            </div>
+                        </div>
+                    </c:forEach>
                 </div>
-                <div class="mb-3">
-                    <label for="formGroupExampleInput2" class="form-label">Mật khẩu</label>
-                    <input type="password" name="password" class="form-control" id="formGroupExampleInput2" placeholder="Mật khẩu ít nhất 6 ký tự">
-                </div>
-                    <div class="mb-3">
-                        <label for="formGroupExampleInput2" class="form-label">Xác nhận mật khẩu</label>
-                        <input type="password" name = "confirmPassword" class="form-control" id="formGroupExampleInput7" placeholder="Nhập lại mật khẩu">
-                    </div>
-                    <h4>THÔNG TIN CÁ NHÂN</h4>
-                    <div class="mb-3">
-                        <label for="formGroupExampleInput2" class="form-label">Họ và tên</label>
-                        <input type="text" name="fullName" class="form-control" id="formGroupExampleInput3" placeholder="Nhập đầy đủ họ và tên đệm">
-                    </div>
-                    <div class="mb-3">
-                        <label for="formGroupExampleInput2" class="form-label">Địa chỉ</label>
-                        <input type="text" name="address" class="form-control" id="formGroupExampleInput4" placeholder="Nhập địa chỉ hiện tại đang sống">
-                    </div>
-                    <div class="mb-3">
-                        <label for="formGroupExampleInput2" class="form-label">Số điện thoại</label>
-                        <input type="text" name="phone" class="form-control" id="formGroupExampleInput5" placeholder="Nhập số điện thoại">
-                    </div>
-                    <div class="mb-3">
-                        <label for="formGroupExampleInput2" class="form-label">Email</label>
-                        <input type="text" name="email" class="form-control" id="formGroupExampleInput6" placeholder="Nhập email">
-                    </div>
-                    <div class="btn-primary">
-                        <button type="submit" class="btn btn-primary">Xác nhận</button>
-                    </div>
-                </form>
             </div>
             <div class="col-2">
                 <div class="sidebar">
-                    <ul class="nav flex-column1">
+                    <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/StoryServlet">Trang chủ</a>
                         </li>
@@ -138,12 +145,22 @@
                         </li>
 
                     </ul>
-
+                    <div class="image">
+                        <img src="image/yeuemsautansaotroikiaQCXcA8a6rV.jpg" width="350" >
+                    </div>
                 </div>
             </div>
         </div>
     </content>
-
+    <nav1 aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+    </nav1>
 </div>
 </body>
 </html>

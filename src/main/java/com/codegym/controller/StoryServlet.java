@@ -14,6 +14,7 @@ import com.codegym.model.PartImage;
 import com.codegym.model.Story;
 import com.codegym.model.User;
 
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -40,68 +41,94 @@ public class StoryServlet extends HttpServlet {
                 dispatcher.forward(request, response);
                 break;
             }
-            case "view1": {
-                int id = Integer.parseInt(request.getParameter("storyId"));
-                List<Part> parts = this.partDAO.seleceAllPartOfStory(id);
-                request.setAttribute("parts", parts);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("story/viewContent1.jsp");
-
+            case "login": {
+                RequestDispatcher dispatcher = request.getRequestDispatcher("story/login.jsp");
                 dispatcher.forward(request, response);
+                break;
+            }
+            case "logOut": {
+                HttpSession session = request.getSession();
+                User user = (User) session.getAttribute("user");
+                session.removeAttribute("user");
+                List<Story> storyList = this.storyDAO.selectAllStory();
+                request.setAttribute("storyList", storyList);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("story/list.jsp");
+                dispatcher.forward(request, response);
+                break;
             }
             case "view": {
+                HttpSession session = request.getSession();
+                User user = (User) session.getAttribute("user");
+                request.setAttribute("user", user);
                 int id = Integer.parseInt(request.getParameter("id"));
                 List<Part> parts = this.partDAO.seleceAllPartOfStory(id);
                 request.setAttribute("parts", parts);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("story/viewPart.jsp");
-
                 dispatcher.forward(request, response);
-
-
                 break;
             }
             case "viewByCategory": {
                 int id = Integer.parseInt(request.getParameter("id"));
+                HttpSession session = request.getSession();
+                User user = (User) session.getAttribute("user");
                 if (id == 1) {
                     List<Story> storyList = this.storyDAO.selectByCategoryId(id);
                     request.setAttribute("storyList", storyList);
+                    request.setAttribute("user", user);
                     RequestDispatcher dispatcher = request.getRequestDispatcher("story/list1.jsp");
                     dispatcher.forward(request, response);
                 } else if (id == 2) {
                     List<Story> storyList = this.storyDAO.selectByCategoryId(id);
                     request.setAttribute("storyList", storyList);
+                    request.setAttribute("user", user);
                     RequestDispatcher dispatcher = request.getRequestDispatcher("story/list2.jsp");
                     dispatcher.forward(request, response);
+                }
+                break;
+            }
+
+            case "read": {
+                HttpSession session = request.getSession();
+                User user = (User) session.getAttribute("user");
+                if (user == null) {
+                    request.setAttribute("message", "Bạn cần đăng nhập mới có thể thao thác!");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("story/alert.jsp");
+                    dispatcher.forward(request, response);
+                } else {
+                    int storyId = Integer.parseInt(request.getParameter("storyId"));
+                    int partId = Integer.parseInt(request.getParameter("id"));
+                    int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+                    if (categoryId == 1) {
+                        List<PartImage> images = this.partImageDAO.selectAllImg(storyId, partId);
+                        List<Part> parts = this.partDAO.seleceAllPartOfStory(storyId);
+                        request.setAttribute("parts", parts);
+                        Part part = this.partDAO.selectById(partId);
+                        request.setAttribute("user", user);
+                        request.setAttribute("part", part);
+                        request.setAttribute("images", images);
+                        RequestDispatcher dispatcher = request.getRequestDispatcher("story/viewContent.jsp");
+                        dispatcher.forward(request, response);
+
+                    }
+                    if (categoryId == 2) {
+                        Part part = this.partDAO.selectById(partId);
+                        List<Part> parts = this.partDAO.seleceAllPartOfStory(storyId);
+                        request.setAttribute("user", user);
+                        request.setAttribute("part", part);
+                        request.setAttribute("parts", parts);
+                        RequestDispatcher dispatcher = request.getRequestDispatcher("story/viewContent1.jsp");
+                        dispatcher.forward(request, response);
+                    }
                 }
 
                 break;
             }
-            case "read": {
-                int storyId = Integer.parseInt(request.getParameter("storyId"));
-                int partId = Integer.parseInt(request.getParameter("id"));
-                int categoryId = Integer.parseInt(request.getParameter("categoryId"));
-                if (categoryId == 1) {
-                    List<PartImage> images = this.partImageDAO.selectAllImg(storyId, partId);
-                    Part part = this.partDAO.selectById(partId);
-                    request.setAttribute("part", part);
-                    request.setAttribute("images", images);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("story/viewContent.jsp");
-                    dispatcher.forward(request, response);
-
-                }
-                if (categoryId == 2) {
-                    Part part = this.partDAO.selectById(partId);
-                    List<Part> parts = this.partDAO.seleceAllPartOfStory(storyId);
-                    request.setAttribute("part", part);
-                    request.setAttribute("parts", parts);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("story/viewContent1.jsp");
-                    dispatcher.forward(request, response);
-                }
-
-
-            }
             default: {
+                HttpSession session = request.getSession();
+                User user = (User) session.getAttribute("user");
                 List<Story> storyList = this.storyDAO.selectAllStory();
                 request.setAttribute("storyList", storyList);
+                request.setAttribute("user", user);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("story/list.jsp");
                 dispatcher.forward(request, response);
                 break;
@@ -126,6 +153,24 @@ public class StoryServlet extends HttpServlet {
                 dispatcher.forward(request, response);
                 break;
             }
+            case "login": {
+                String username = request.getParameter("username");
+                String password = request.getParameter("password");
+                boolean checkLogin = this.userDAO.checkLogin(username, password);
+                User user = this.userDAO.findUserByUsernameAndPassword(username, password);
+
+                if (checkLogin) {
+                    request.setAttribute("user", user);
+                    HttpSession session = request.getSession();
+                    session.setAttribute("user", user);
+                    List<Story> storyList = this.storyDAO.selectAllStory();
+                    request.setAttribute("storyList", storyList);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("story/list.jsp");
+                    dispatcher.forward(request, response);
+
+                }
+                break;
+            }
             case "register": {
                 String username = request.getParameter("username");
                 String password = request.getParameter("password");
@@ -137,14 +182,17 @@ public class StoryServlet extends HttpServlet {
 
                 if (confirmPassword.equals(password)) {
                     User newUser = new User(username, password, fullName, email, address, phone);
+                    List<Story> storyList = this.storyDAO.selectAllStory();
+                    request.setAttribute("storyList", storyList);
                     this.userDAO.register(newUser);
                     request.setAttribute("user", newUser);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("story/register.jsp");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("story/list.jsp");
                     dispatcher.forward(request, response);
                 } else {
 
                 }
             }
+
         }
     }
 }

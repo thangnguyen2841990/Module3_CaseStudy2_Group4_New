@@ -75,42 +75,14 @@
 
 
             <div class="col-10">
-                <h3>ĐĂNG KÝ TÀI KHOẢN</h3>
-
-                <form method="post">
-                <div class="mb-3">
-                    <label for="formGroupExampleInput" class="form-label">Tài khoản</label>
-                    <input type="text" size="20" name="username" class="form-control" id="formGroupExampleInput" placeholder="Tên tài khoản(6-12 ký tự, không ký tự in hoa)">
+                <h3>CẢNH BÁO</h3>
+                <div class = "message">
+                    <c:if test="${requestScope['message']!= null}">
+                        <div class="alert alert-warning">
+                            <strong>Bạn cần đăng nhập mới có thể sử dụng chức năng này!</strong>
+                        </div>
+                    </c:if>
                 </div>
-                <div class="mb-3">
-                    <label for="formGroupExampleInput2" class="form-label">Mật khẩu</label>
-                    <input type="password" name="password" class="form-control" id="formGroupExampleInput2" placeholder="Mật khẩu ít nhất 6 ký tự">
-                </div>
-                    <div class="mb-3">
-                        <label for="formGroupExampleInput2" class="form-label">Xác nhận mật khẩu</label>
-                        <input type="password" name = "confirmPassword" class="form-control" id="formGroupExampleInput7" placeholder="Nhập lại mật khẩu">
-                    </div>
-                    <h4>THÔNG TIN CÁ NHÂN</h4>
-                    <div class="mb-3">
-                        <label for="formGroupExampleInput2" class="form-label">Họ và tên</label>
-                        <input type="text" name="fullName" class="form-control" id="formGroupExampleInput3" placeholder="Nhập đầy đủ họ và tên đệm">
-                    </div>
-                    <div class="mb-3">
-                        <label for="formGroupExampleInput2" class="form-label">Địa chỉ</label>
-                        <input type="text" name="address" class="form-control" id="formGroupExampleInput4" placeholder="Nhập địa chỉ hiện tại đang sống">
-                    </div>
-                    <div class="mb-3">
-                        <label for="formGroupExampleInput2" class="form-label">Số điện thoại</label>
-                        <input type="text" name="phone" class="form-control" id="formGroupExampleInput5" placeholder="Nhập số điện thoại">
-                    </div>
-                    <div class="mb-3">
-                        <label for="formGroupExampleInput2" class="form-label">Email</label>
-                        <input type="text" name="email" class="form-control" id="formGroupExampleInput6" placeholder="Nhập email">
-                    </div>
-                    <div class="btn-primary">
-                        <button type="submit" class="btn btn-primary">Xác nhận</button>
-                    </div>
-                </form>
             </div>
             <div class="col-2">
                 <div class="sidebar">

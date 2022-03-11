@@ -94,6 +94,7 @@ content .content{
 .image{
     float: right;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 .content-img{
 
@@ -110,4 +111,7 @@ content .content{
     background-color: whitesmoke;
     float: right;
 
+}
+.username a {
+    float: right;
 }
