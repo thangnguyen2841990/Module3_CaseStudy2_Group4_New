@@ -182,9 +182,11 @@ public class StoryServlet extends HttpServlet {
 
                 if (confirmPassword.equals(password)) {
                     User newUser = new User(username, password, fullName, email, address, phone);
+                    List<Story> storyList = this.storyDAO.selectAllStory();
+                    request.setAttribute("storyList", storyList);
                     this.userDAO.register(newUser);
                     request.setAttribute("user", newUser);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("story/login.jsp");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("story/list.jsp");
                     dispatcher.forward(request, response);
                 } else {
 
