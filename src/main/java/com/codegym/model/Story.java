@@ -4,14 +4,18 @@ public class Story {
     protected int id;
     protected int categoryId;
     protected String img;
-
     protected String name;
     protected double price;
     protected String writer;
     protected String dateSubmited;
 
+
+
+
     public Story() {
     }
+
+
 
     public Story(int id, int categoryId, String img, String name, double price, String writer, String dateSubmited) {
         this.id = id;
@@ -23,7 +27,8 @@ public class Story {
         this.dateSubmited = dateSubmited;
     }
 
-    public Story(int categoryId, String img, String name, double price, String writer, String dateSubmited) {
+
+    public Story(int categoryId,String img, String name,  double price, String writer, String dateSubmited) {
         this.categoryId = categoryId;
         this.img = img;
         this.name = name;
@@ -31,6 +36,8 @@ public class Story {
         this.writer = writer;
         this.dateSubmited = dateSubmited;
     }
+
+
 
     public int getId() {
         return id;

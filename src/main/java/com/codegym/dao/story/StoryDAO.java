@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StoryDAO implements IStoryDAO {
-    private String jdbcURL = "jdbc:mysql://localhost:3306/casestudy?useSSL=false";
+    private String jdbcURL = "jdbc:mysql://localhost:3306/caseStudy1?useSSL=false";
     private String jdbcUsername = "root";
-    private String jdbcPassword = "thuthuyda1";
+    private String jdbcPassword = "123456";
 
     protected Connection getConnection() {
         Connection connection = null;
@@ -38,9 +38,9 @@ public class StoryDAO implements IStoryDAO {
                 int categoryId = rs.getInt("categoryId");
                 String img = rs.getString("img");
                 String name = rs.getString("name");
-                Double price = rs.getDouble("price");
-                String writer = rs.getString("writer");
-                String dateSubmited = rs.getString("dateSubmited");
+                double price = rs.getDouble("price");
+                String writer = rs.getString("author");
+                String dateSubmited = rs.getString("dateSubmitted");
 
                 storyList.add(new Story(id,categoryId,img,name,price,writer,dateSubmited));
             }
@@ -63,9 +63,9 @@ public class StoryDAO implements IStoryDAO {
                 int id = rs.getInt("id");
                 String img = rs.getString("img");
                 String name = rs.getString("name");
-                Double price = rs.getDouble("price");
-                String writer = rs.getString("writer");
-                String dateSubmited = rs.getString("dateSubmited");
+                double price = rs.getDouble("price");
+                String writer = rs.getString("author");
+                String dateSubmited = rs.getString("dateSubmitted");
                 stories.add( new Story(id,categoryId,img,name,price,writer,dateSubmited));
             }
         } catch (SQLException e) {
@@ -88,9 +88,9 @@ public class StoryDAO implements IStoryDAO {
                 int categoryId = rs.getInt("categoryId");
                 String name1 = rs.getString("name");
                 String img = rs.getString("img");
-                Double price = rs.getDouble("price");
-                String writer = rs.getString("writer");
-                String dateSubmited = rs.getString("dateSubmited");
+                double price = rs.getDouble("price");
+                String writer = rs.getString("author");
+                String dateSubmited = rs.getString("dateSubmitted");
                 storyList.add( new Story(id,categoryId,img,name1,price,writer,dateSubmited));
             }
         } catch (SQLException e) {

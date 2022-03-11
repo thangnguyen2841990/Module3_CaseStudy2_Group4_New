@@ -9,9 +9,9 @@ import java.util.List;
 
 public class PartImageDAO implements IPartImageDAO{
     String query = "call select_all_image(?,?)";
-    private String jdbcURL = "jdbc:mysql://localhost:3306/caseStudy?useSSL=false";
+    private String jdbcURL = "jdbc:mysql://localhost:3306/caseStudy1?useSSL=false";
     private String jdbcUsername = "root";
-    private String jdbcPassword = "thuthuyda1";
+    private String jdbcPassword = "123456";
 
     protected Connection getConnection() {
         Connection connection = null;
