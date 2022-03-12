@@ -9,7 +9,7 @@ import java.util.List;
 public class StoryDAO implements IStoryDAO {
     private String jdbcURL = "jdbc:mysql://localhost:3306/casestudy?useSSL=false";
     private String jdbcUsername = "root";
-    private String jdbcPassword = "thuthuyda1";
+    private String jdbcPassword = "12012001";
 
     protected Connection getConnection() {
         Connection connection = null;

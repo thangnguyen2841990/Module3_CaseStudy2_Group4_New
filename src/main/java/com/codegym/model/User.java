@@ -4,7 +4,6 @@ public class User {
     protected int id;
     protected String username;
     protected String password;
-    protected double credit;
     protected String fullName;
     protected boolean role;
     protected String email;
@@ -12,11 +11,13 @@ public class User {
     protected String address;
     protected String phone;
 
-    public User(int id, String username, String password, double credit, String fullName, boolean role, String email, String img, String address, String phone) {
+    public User() {
+    }
+
+    public User(int id, String username, String password, String fullName, boolean role, String email, String img, String address, String phone) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.credit = credit;
         this.fullName = fullName;
         this.role = role;
         this.email = email;
@@ -25,10 +26,9 @@ public class User {
         this.phone = phone;
     }
 
-    public User(String username, String password, double credit, String fullName, boolean role, String email, String img, String address, String phone) {
+    public User(String username, String password , String fullName, boolean role, String email, String img, String address, String phone) {
         this.username = username;
         this.password = password;
-        this.credit = credit;
         this.fullName = fullName;
         this.role = role;
         this.email = email;
@@ -68,14 +68,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public double getCredit() {
-        return credit;
-    }
-
-    public void setCredit(double credit) {
-        this.credit = credit;
     }
 
     public String getFullName() {

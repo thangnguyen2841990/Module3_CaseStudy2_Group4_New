@@ -4,31 +4,30 @@ public class Story {
     protected int id;
     protected int categoryId;
     protected String img;
-
     protected String name;
     protected double price;
-    protected String writer;
+    protected String author;
     protected String dateSubmited;
 
     public Story() {
     }
 
-    public Story(int id, int categoryId, String img, String name, double price, String writer, String dateSubmited) {
+    public Story(int id, int categoryId, String img, String name, double price, String author, String dateSubmited) {
         this.id = id;
         this.categoryId = categoryId;
         this.img = img;
         this.name = name;
         this.price = price;
-        this.writer = writer;
+        this.author = author;
         this.dateSubmited = dateSubmited;
     }
 
-    public Story(int categoryId, String img, String name, double price, String writer, String dateSubmited) {
+    public Story(int categoryId, String img, String name, double price, String author, String dateSubmited) {
         this.categoryId = categoryId;
         this.img = img;
         this.name = name;
         this.price = price;
-        this.writer = writer;
+        this.author = author;
         this.dateSubmited = dateSubmited;
     }
 
@@ -72,12 +71,12 @@ public class Story {
         this.price = price;
     }
 
-    public String getWriter() {
-        return writer;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setWriter(String writer) {
-        this.writer = writer;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getDateSubmited() {
