@@ -7,6 +7,7 @@ public class Part {
     protected int episode;
     protected String name;
     protected String content;
+    protected String image;
 
     public Part() {
     }
@@ -19,6 +20,7 @@ public class Part {
         this.name = name;
         this.content = content;
     }
+
 
     public int getId() {
         return id;

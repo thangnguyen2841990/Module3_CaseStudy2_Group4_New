@@ -13,6 +13,11 @@ public class PartImage {
         this.img = img;
     }
 
+    public PartImage(int id, String img) {
+        this.id = id;
+        this.img = img;
+    }
+
     public int getId() {
         return id;
     }

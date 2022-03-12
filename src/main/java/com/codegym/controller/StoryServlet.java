@@ -49,9 +49,9 @@ public class StoryServlet extends HttpServlet {
             case "view": {
                 HttpSession session = request.getSession();
                 User user = (User) session.getAttribute("user");
-                session.setAttribute("user",user);
+                session.setAttribute("user", user);
                 int id = Integer.parseInt(request.getParameter("id"));
-                List<Part> parts = this.partDAO.seleceAllPartOfStory(id);
+                List<Part> parts = this.partDAO.selectAllPartOfStory(id);
                 request.setAttribute("parts", parts);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("story/viewPart.jsp");
 
@@ -79,10 +79,10 @@ public class StoryServlet extends HttpServlet {
             case "read": {
                 HttpSession session = request.getSession();
                 User user = (User) session.getAttribute("user");
-                if(user == null){
+                if (user == null) {
                     RequestDispatcher dispatcher = request.getRequestDispatcher("story/login.jsp");
                     dispatcher.forward(request, response);
-                }else {
+                } else {
                     int storyId = Integer.parseInt(request.getParameter("storyId"));
                     int partId = Integer.parseInt(request.getParameter("id"));
                     int categoryId = Integer.parseInt(request.getParameter("categoryId"));
@@ -97,15 +97,13 @@ public class StoryServlet extends HttpServlet {
                     }
                     if (categoryId == 2) {
                         Part part = this.partDAO.selectById(partId);
-                        List<Part> parts = this.partDAO.seleceAllPartOfStory(storyId);
+                        List<Part> parts = this.partDAO.selectAllPartOfStory(storyId);
                         request.setAttribute("part", part);
                         request.setAttribute("parts", parts);
                         RequestDispatcher dispatcher = request.getRequestDispatcher("story/viewContent1.jsp");
                         dispatcher.forward(request, response);
                     }
                 }
-
-
             }
             default: {
                 HttpSession session = request.getSession();
@@ -137,7 +135,7 @@ public class StoryServlet extends HttpServlet {
                 dispatcher.forward(request, response);
                 break;
             }
-            case "login" : {
+            case "login": {
                 String username = request.getParameter("username");
                 String password = request.getParameter("password");
                 boolean checkLogin = this.userDAO.checkLogin(username, password);
@@ -167,8 +165,8 @@ public class StoryServlet extends HttpServlet {
 //                        RequestDispatcher dispatcher = request.getRequestDispatcher("story/viewContent.jsp");
 //                        dispatcher.forward(request, response);
 //                    }
-                        RequestDispatcher dispatcher = request.getRequestDispatcher("story/list.jsp");
-                        dispatcher.forward(request, response);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("story/list.jsp");
+                    dispatcher.forward(request, response);
 
                 }
                 break;

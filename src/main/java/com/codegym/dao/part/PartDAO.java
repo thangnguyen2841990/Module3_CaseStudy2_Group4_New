@@ -10,7 +10,7 @@ import java.util.List;
 public class PartDAO implements IPartDAO {
     private String jdbcURL = "jdbc:mysql://localhost:3306/caseStudy?useSSL=false";
     private String jdbcUsername = "root";
-    private String jdbcPassword = "thuthuyda1";
+    private String jdbcPassword = "123456";
 
     protected Connection getConnection() {
         Connection connection = null;
@@ -25,12 +25,12 @@ public class PartDAO implements IPartDAO {
     }
 
     @Override
-    public List<Part> seleceAllPartOfStory(int storyID) {
+    public List<Part> selectAllPartOfStory(int storyID) {
 
         List<Part> parts = new ArrayList<>();
         Connection connection = getConnection();
         try {
-           PreparedStatement statement = connection.prepareStatement("SELECT * from part where storyId = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * from part where storyId = ?");
             statement.setInt(1,storyID);
             System.out.println(statement);
             ResultSet rs = statement.executeQuery();

@@ -3,8 +3,8 @@ package com.codegym.model;
 public class Story {
     protected int id;
     protected int categoryId;
+    protected String categoryName;
     protected String img;
-
     protected String name;
     protected double price;
     protected String writer;
@@ -13,9 +13,9 @@ public class Story {
     public Story() {
     }
 
-    public Story(int id, int categoryId, String img, String name, double price, String writer, String dateSubmited) {
-        this.id = id;
+    public Story(int categoryId, String categoryName, String img, String name, double price, String writer, String dateSubmited) {
         this.categoryId = categoryId;
+        this.categoryName = categoryName;
         this.img = img;
         this.name = name;
         this.price = price;
@@ -23,8 +23,10 @@ public class Story {
         this.dateSubmited = dateSubmited;
     }
 
-    public Story(int categoryId, String img, String name, double price, String writer, String dateSubmited) {
+    public Story(int id, int categoryId, String categoryName, String img, String name, double price, String writer, String dateSubmited) {
+        this.id = id;
         this.categoryId = categoryId;
+        this.categoryName = categoryName;
         this.img = img;
         this.name = name;
         this.price = price;
@@ -46,6 +48,14 @@ public class Story {
 
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public String getImg() {

@@ -5,9 +5,8 @@ import com.codegym.model.Part;
 import java.util.List;
 
 public interface IPartDAO {
-    List<Part> seleceAllPartOfStory(int storyID);
+    List<Part> selectAllPartOfStory(int storyID);
 
     Part selectById(int id);
-
 
 }
