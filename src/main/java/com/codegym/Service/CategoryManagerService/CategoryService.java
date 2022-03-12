@@ -19,21 +19,27 @@ public class CategoryService implements ICategoryService{
 
     @Override
     public Category findById(int id) {
-        return null;
+        return categoryDAO.findById(id);
     }
 
     @Override
     public boolean create(Category category) {
-        return false;
+        return categoryDAO.create(category);
     }
 
     @Override
     public boolean updateById(int id, Category category) {
-        return false;
+        return categoryDAO.updateById(id,category);
     }
 
     @Override
     public boolean deleteById(int id) {
-        return false;
+        return categoryDAO.deleteById(id);
+    }
+
+    @Override
+    public List<Category> findAllCategoryByName(String name) {
+        name = "%" + name + "%";
+        return categoryDAO.findAllCategoryByName(name);
     }
 }

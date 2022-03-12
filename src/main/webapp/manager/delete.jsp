@@ -151,11 +151,11 @@
                                 <select class="form-control" id="category" name="categoryId">
                                     <c:forEach var="category" items="${categories}">
                                         <c:choose>
-                                            <c:when test="${category.id  == stories.categoryId}">
-                                                <option value="${category.id}" selected>${category.name}</option>
+                                            <c:when test="${category.id  == story.categoryId}">
+                                                <option value="${category.id}" selected disabled>${category.name}</option>
                                             </c:when>
                                             <c:otherwise>
-                                                <option value="${category.id}">${category.name}</option>
+                                                <option value="${category.id}"  disabled>${category.name}</option>
                                             </c:otherwise>
                                         </c:choose>
                                     </c:forEach>

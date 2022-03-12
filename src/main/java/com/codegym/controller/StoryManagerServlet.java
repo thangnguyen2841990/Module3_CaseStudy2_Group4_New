@@ -49,9 +49,11 @@ public class StoryManagerServlet extends HttpServlet {
 
 
     private void showDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Category> categories = categoryService.findAll();
         int id = Integer.parseInt(request.getParameter("id"));
         Story story = storyManagerService.findById(id);
         request.setAttribute("story", story);
+        request.setAttribute("categories",categories);
         RequestDispatcher dispatcher = request.getRequestDispatcher("manager/delete.jsp");
         dispatcher.forward(request, response);
     }
@@ -77,7 +79,7 @@ public class StoryManagerServlet extends HttpServlet {
         List<Story> stories = storyManagerService.findAll();
         String q = request.getParameter("q");
         if (q != null){
-            stories = storyManagerService.findAllProductByName(q);
+            stories = storyManagerService.findAllStoryByName(q);
         }
         request.setAttribute("stories", stories);
         RequestDispatcher dispatcher = request.getRequestDispatcher("manager/list.jsp");
@@ -117,7 +119,7 @@ public class StoryManagerServlet extends HttpServlet {
         double price = Double.parseDouble(request.getParameter("price"));
         String writer = request.getParameter("author");
         String dateSubmited = request.getParameter("submitted");
-        Story story = new Story(categoryId, img, name, price, writer, dateSubmited);
+        Story story = new Story(categoryId, img, name, (int) price, writer, dateSubmited);
         storyManagerService.updateById(id, story);
         response.sendRedirect("stories");
     }
@@ -129,8 +131,7 @@ public class StoryManagerServlet extends HttpServlet {
         String sub = request.getParameter("submitted");
         String img = request.getParameter("img");
         int categoryId = Integer.parseInt(request.getParameter("categoryId"));
-//        Story story = new Story(categoryId, name, writer, price, sub, img);
-        Story story = new Story(categoryId,img,name,price,writer,sub);
+        Story story = new Story(categoryId,img,name, (int) price,writer,sub);
         storyManagerService.create(story);
         response.sendRedirect("stories");
     }

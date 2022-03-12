@@ -123,6 +123,7 @@
                         <th scope="col">Tác Giả</th>
                         <th scope="col">Ngày Đăng</th>
                         <th scope="col">Hình Ảnh</th>
+                        <th colspan="2">Lựa Chọn</th>
 
                     </tr>
                     </thead>

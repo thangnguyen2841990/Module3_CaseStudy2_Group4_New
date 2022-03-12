@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PartDAO implements IPartDAO {
-    private String jdbcURL = "jdbc:mysql://localhost:3306/caseStudy?useSSL=false";
+    private String jdbcURL = "jdbc:mysql://localhost:3306/caseStudy1?useSSL=false";
     private String jdbcUsername = "root";
     private String jdbcPassword = "123456";
 

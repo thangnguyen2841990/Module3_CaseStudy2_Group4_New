@@ -39,9 +39,13 @@ public class StoryManagerService implements IStoryManagerService{
         return storyManagerDAO.deleteById(id);
     }
     @Override
-    public List<Story> findAllProductByName(String name) {
+    public List<Story> findAllStoryByName(String name) {
         name = "%" + name + "%";
-        return storyManagerDAO.findAllProductByName(name);
+        return storyManagerDAO.findAllStoryByName(name);
     }
 
+    @Override
+    public List<Story> findAllProductByCategoryId(int categoryId) {
+        return storyManagerDAO.findAllStoryByCategoryId(categoryId);
+    }
 }

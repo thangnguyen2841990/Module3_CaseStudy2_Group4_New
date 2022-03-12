@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: tubac
-  Date: 11/03/2022
-  Time: 14:16
+  Date: 12/03/2022
+  Time: 12:52
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,8 +10,7 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bootstrap 4 -->
@@ -29,16 +28,19 @@
     <!-- summernote -->
     <link rel="stylesheet" href="../plugins/summernote/summernote-bs4.min.css">
 </head>
+<style>
+    th{
+        text-align: center;
+    }
+</style>
 <body>
-
-<div class="wrapper">
+<div class = "wrapper">
 
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
         <a href="index3.html" class="brand-link">
-            <img src="../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                 style="opacity: .8">
-            <span class="brand-text font-weight-light">AdminLTE 3</span>
+            <img src="../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+            <span class="brand-text font-weight-light">Admin System</span>
         </a>
 
         <!-- Sidebar -->
@@ -57,11 +59,10 @@
             <div class="form-inline">
                 <form action="categories">
                     <div class="input-group" data-widget="sidebar-search">
-                        <input class="form-control form-control-sidebar" name="q" type="search" placeholder="Search"
-                               aria-label="Search">
+                        <input class="form-control form-control-sidebar" name="q" type="search" placeholder="Search" aria-label="Search">
                         <div class="input-group-append">
                             <button class="btn btn-sidebar">
-                                <i class="fas fa-search fa-fw"></i>
+                                <i class="fas fa-search fa-fw">Tìm Kiếm</i>
                             </button>
                         </div>
                     </div>
@@ -70,31 +71,30 @@
 
             <!-- Sidebar Menu -->
             <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                    data-accordion="false">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
                     <li class="nav-item">
                         <a href="stories" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
-                                Quản lý Danh Sách
+                                Quản Lý Danh Sách
                             </p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="categories" class="nav-link">
+                        <a href="/categories" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
-                                Quản lý danh mục
+                                Quản Lý Danh Mục
                             </p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="stories?action=create" class="nav-link">
+                        <a href="/stories?action=create" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
                             <p>
-                                Tạo Mới Sản Phẩm
+                                Tạo Sản Phẩm Mới
                             </p>
                         </a>
                     </li>
@@ -111,38 +111,24 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                <h1>Danh sách danh mục</h1>
-                <a class="btn btn-primary float-end" href="categories?action=create">Tạo thêm danh mục</a>
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th scope="col">STT</th>
-                        <th scope="col">Tên danh mục phẩm</th>
-                        <th colspan="2">Lựa Chọn</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="category" varStatus="loop" items="${categories}">
-                        <tr>
-                            <td>${loop.count}</td>
-                            <td><a href="categories?action=view&id=${category.id}">${category.name}</a></td>
-                            <td>
-                                <a class="btn btn-info" href="categories?action=edit&id=${category.id}">SỬA<i class="fa fa-edit"></i></a>
-                            </td>
-                            <td><a class="btn btn-danger" href="categories?action=delete&id=${category.id}">XÓA<i class="fa fa-trash"></i></a></td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
+                <div class="container">
+                    <h1>TẠO MỚI DANH MỤC</h1>
+                    <a href="categories">To Back</a>
+                    <form action="categories?action=create" method="post">
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Tên Danh Mục</label>
+                            <input type="text" class="form-control" id="exampleInputPassword1" name="name">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Tạo mới</button>
+                    </form>
+                </div>
             </div><!-- /.container-fluid -->
         </section>
         <!-- /.content -->
     </div>
 
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 </body>
 </html>
