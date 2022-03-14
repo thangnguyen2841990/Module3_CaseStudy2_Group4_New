@@ -4,7 +4,6 @@ public class Story {
     protected int id;
     protected int categoryId;
     protected String img;
-
     protected String name;
     protected int price;
     protected String writer;

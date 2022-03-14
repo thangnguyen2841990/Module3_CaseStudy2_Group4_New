@@ -10,5 +10,5 @@ public interface IStoryDAO {
     List<Story> selectAllStory();
     List<Story> selectByCategoryId(int categoryId);
     List<Story> selectByName(String name);
-
+    Story findStoryById(int id);
 }

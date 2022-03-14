@@ -11,6 +11,14 @@ public class Part {
     public Part() {
     }
 
+    public Part(int storyID, int categoryId, int episode, String name, String content) {
+        this.storyID = storyID;
+        this.categoryId = categoryId;
+        this.episode = episode;
+        this.name = name;
+        this.content = content;
+    }
+
     public Part(int id, int storyID, int categoryId, int episode, String name, String content) {
         this.id = id;
         this.storyID = storyID;

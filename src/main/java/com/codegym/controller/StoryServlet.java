@@ -1,5 +1,7 @@
 package com.codegym.controller;
 
+import com.codegym.dao.cart.CartDAO;
+import com.codegym.dao.cart.ICartDAO;
 import com.codegym.dao.part.IPartDAO;
 import com.codegym.dao.partImage.IPartImageDAO;
 import com.codegym.dao.partImage.PartImageDAO;
@@ -9,10 +11,8 @@ import com.codegym.dao.part.PartDAO;
 import com.codegym.dao.story.StoryDAO;
 import com.codegym.dao.user.IUserDAO;
 import com.codegym.dao.user.UserDAO;
+import com.codegym.model.*;
 import com.codegym.model.Part;
-import com.codegym.model.PartImage;
-import com.codegym.model.Story;
-import com.codegym.model.User;
 
 
 import javax.servlet.*;
@@ -27,6 +27,7 @@ public class StoryServlet extends HttpServlet {
     private IPartDAO partDAO = new PartDAO();
     private IPartImageDAO partImageDAO = new PartImageDAO();
     private IUserDAO userDAO = new UserDAO();
+    private ICartDAO cartDAO = new CartDAO();
 
 
     @Override
@@ -123,6 +124,53 @@ public class StoryServlet extends HttpServlet {
 
                 break;
             }
+            case "buy": {
+                HttpSession session = request.getSession();
+                User user = (User) session.getAttribute("user");
+                if (user == null) {
+                    request.setAttribute("message", "Bạn cần đăng nhập mới có thể thao thác!");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("story/alert.jsp");
+                    dispatcher.forward(request, response);
+                } else {
+                    int storyId = Integer.parseInt(request.getParameter("storyId"));
+                    int partId = Integer.parseInt(request.getParameter("partId"));
+                    int userId = Integer.parseInt(request.getParameter("userId"));
+                    int quanlity = 1;
+                    Story story = this.storyDAO.findStoryById(storyId);
+                    String storyName = story.getName();
+                    Part part = this.partDAO.selectById(partId);
+                    String storyPart = part.getName();
+                    String img = story.getImg();
+                    int price = (int) story.getPrice();
+                    int payMoney = price * quanlity;
+                    Cart cart = new Cart(storyId, partId, userId, storyName, storyPart, img, quanlity, price, payMoney);
+                    this.cartDAO.insertNewOrder(cart);
+                    List<Cart> cartList = this.cartDAO.selectAllOrderById(userId);
+                    int totalPayMonney = this.cartDAO.totalPayMonney(userId);
+                    request.setAttribute("totalPayMoney",totalPayMonney);
+                    request.setAttribute("cartList", cartList);
+                    request.setAttribute("part", part);
+                    request.setAttribute("story", story);
+                    request.setAttribute("user", user);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("story/orderStory.jsp");
+                    dispatcher.forward(request, response);
+                }
+
+
+                break;
+            }
+            case "deleteCart": {
+                int id = Integer.parseInt(request.getParameter("id"));
+                this.cartDAO.deleteOder(id);
+               response.sendRedirect("/CartServlet");
+                break;
+            }
+            case "updateCart" : {
+                int id = Integer.parseInt(request.getParameter("id"));
+                Cart cart = this.cartDAO.selectAllOrderById1(id);
+                int quantity = Integer.parseInt(request.getParameter("quantity"));
+                break;
+            }
             default: {
                 HttpSession session = request.getSession();
                 User user = (User) session.getAttribute("user");
@@ -144,6 +192,10 @@ public class StoryServlet extends HttpServlet {
             action = "";
         }
         switch (action) {
+            case "editCart" : {
+                int quantity = Integer.parseInt(request.getParameter("quantity"));
+                break;
+            }
             case "find": {
                 String name = request.getParameter("name");
                 String name1 = "%" + name + "%";
@@ -165,8 +217,12 @@ public class StoryServlet extends HttpServlet {
                     session.setAttribute("user", user);
                     List<Story> storyList = this.storyDAO.selectAllStory();
                     request.setAttribute("storyList", storyList);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("story/list.jsp");
-                    dispatcher.forward(request, response);
+                    if (user.isRole()){
+                       response.sendRedirect("/stories");
+                    }else {
+                        response.sendRedirect("/StoryServlet");
+                    }
+
 
                 }
                 break;

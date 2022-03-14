@@ -1,12 +1,10 @@
 package com.codegym.dao.category;
 
+import com.codegym.dao.IGeneralDAO;
 import com.codegym.model.Category;
-import com.codegym.model.Story;
 
 import java.util.List;
 
-public interface ICategoryDAO {
-    List<Category> findAll();
-
-    Story findStoryById(int id);
+public interface ICategoryDAO extends IGeneralDAO <Category> {
+    List<Category> findAllCategoryByName(String name);
 }

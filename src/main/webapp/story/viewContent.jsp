@@ -33,10 +33,20 @@
                 <div class="username">
                     <!-- Example split danger button -->
                     <div class="btn-group" style="float: right">
-                        <h5 style = "margin-top: 20px ; font-size: 15px">
-                                ${requestScope['user'].getUsername()}
+                        <div class="avatar">
+                            <img src="/avatar/minh94.png" class="img-circle" alt="Cinque Terre" width="50" height="50" style="   border: 1px #d4d4d4 solid; padding: 1px;
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+margin-top:5px;
+margin-right:10px">
+                        </div>
+                        <h5 style="margin-top: 20px ; font-size: 15px">
+                            Chào: ${requestScope['user'].getUsername()}
                         </h5>
-                        <button style = "margin-top: 10px" type="button" class="btn  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button style="margin-top: 10px" type="button"
+                                class="btn  dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
+                                aria-expanded="false">
                             <span class="visually-hidden">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu">
@@ -49,6 +59,8 @@
 
             </c:otherwise>
         </c:choose>
+
+
 
 
     </header>

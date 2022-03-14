@@ -60,14 +60,13 @@ public class UserDAO implements IUserDAO {
                  String username = rs.getString("username");
                  String password = rs.getString("password");
 
-                  double credit =rs.getDouble("credit");
                  String fullName= rs.getString("fullName");
                 boolean role = rs.getBoolean("role");
                  String email= rs.getString("email");
                   String img =rs.getString("img");
                   String address = rs.getString("address");
                   String phone = rs.getString("phone");
-                  users.add(new User(id,username,password,credit,fullName,role,email,img,address,phone));
+                  users.add(new User(id,username,password,fullName,role,email,img,address,phone));
              }
         } catch (SQLException e) {
             e.printStackTrace();

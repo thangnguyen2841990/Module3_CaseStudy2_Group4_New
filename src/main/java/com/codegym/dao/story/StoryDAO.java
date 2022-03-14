@@ -1,5 +1,6 @@
 package com.codegym.dao.story;
 
+import com.codegym.dao.DBConnection;
 import com.codegym.model.Story;
 
 import java.sql.*;
@@ -7,27 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StoryDAO implements IStoryDAO {
-    private String jdbcURL = "jdbc:mysql://localhost:3306/casestudy?useSSL=false";
-    private String jdbcUsername = "root";
-    private String jdbcPassword = "thuthuyda1";
 
-    protected Connection getConnection() {
-        Connection connection = null;
-
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
-        return connection;
-    }
+    DBConnection DBConnection = new DBConnection();
+    Connection connection = DBConnection.getConnection();
 
     @Override
     public List<Story> selectAllStory() {
         String query = "{call select_all_story()}";
         List<Story> storyList = new ArrayList<>();
-        Connection connection = getConnection();
+
         try {
             CallableStatement statement = connection.prepareCall(query);
 
@@ -57,7 +46,7 @@ public class StoryDAO implements IStoryDAO {
     @Override
     public List<Story> selectByCategoryId(int categoryId) {
         List<Story> stories = new ArrayList<>();
-        Connection connection = getConnection();
+
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM story where categoryId = ?");
             preparedStatement.setInt(1,categoryId);
@@ -84,7 +73,7 @@ public class StoryDAO implements IStoryDAO {
     public List<Story> selectByName(String name) {
         String query = "call select_by_name1(?)";
         List<Story> storyList = new ArrayList<>();
-        Connection connection = getConnection();
+
         try {
             CallableStatement statement = connection.prepareCall(query);
             statement.setString(1,name);
@@ -106,5 +95,29 @@ public class StoryDAO implements IStoryDAO {
             e.printStackTrace();
         }
         return storyList;
+    }
+
+    @Override
+    public Story findStoryById(int id) {
+        Story story = new Story();
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM STORY WHERE id = ?");
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id1 = rs.getInt("id");
+                int categoryId = rs.getInt("categoryId");
+                String img = rs.getString("img");
+                String name = rs.getString("name");
+                int price = (int) rs.getDouble("price");
+                String writer = rs.getString("author");
+                String dateSubmited = rs.getString("dateSubmitted");
+                story = new Story(id1,categoryId,img,name,price,writer,dateSubmited);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return story;
     }
 }
